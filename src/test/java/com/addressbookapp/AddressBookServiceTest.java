@@ -5,18 +5,17 @@ import com.addressbookapp.service.AddressBookService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddressBookServiceTest {
 
     @Test
-    void givenNewContact_WhenAdded_ShouldIncreaseContactListSize() {
+    void givenExistingContact_WhenEdited_ShouldUpdateContactDetails() {
+
         AddressBookService addressBookService = new AddressBookService();
 
         Contact contact = new Contact(
-                "Shweta",
+                "Alice",
                 "Srivastava",
                 "MP Nagar",
                 "Bhopal",
@@ -28,19 +27,21 @@ class AddressBookServiceTest {
 
         addressBookService.addContact(contact);
 
-        assertEquals(1, addressBookService.getAllContacts().size());
-    }
+        boolean isEdited = addressBookService.editContact(
+                "Alice",
+                "Srivastava",
+                "Lalghati",
+                "Bhopal",
+                "Madhya Pradesh",
+                "462030",
+                "9999999999",
+                "newalice@gmail.com"
+        );
 
-    @Test
-    void givenMultipleContacts_WhenAdded_ShouldStoreAllContacts() {
-        AddressBookService addressBookService = new AddressBookService();
-
-        Contact contact1 = new Contact("Shweta", "Srivastava", "A", "Bhopal", "MP", "462001", "1111111111", "a@gmail.com");
-        Contact contact2 = new Contact("Riya", "Kumari", "B", "Patna", "Bihar", "800001", "2222222222", "b@gmail.com");
-
-        addressBookService.addContact(contact1);
-        addressBookService.addContact(contact2);
-
-        assertEquals(2, addressBookService.getAllContacts().size());
+        assertTrue(isEdited);
+        assertEquals("Lalghati", addressBookService.getAllContacts().get(0).getAddress());
+        assertEquals("462030", addressBookService.getAllContacts().get(0).getZip());
+        assertEquals("9999999999", addressBookService.getAllContacts().get(0).getPhoneNumber());
+        assertEquals("newalice@gmail.com", addressBookService.getAllContacts().get(0).getEmail());
     }
 }
