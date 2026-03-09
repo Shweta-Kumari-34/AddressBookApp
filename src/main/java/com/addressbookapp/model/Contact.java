@@ -13,15 +13,12 @@ public class Contact {
     private String phoneNumber;
     private String email;
 
-    // Default Constructor
     public Contact() {
     }
 
-    // Parameterized Constructor
     public Contact(String firstName, String lastName, String address,
                    String city, String state, String zip,
                    String phoneNumber, String email) {
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -31,8 +28,6 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-
-    // Getters and Setters
 
     public String getFirstName() {
         return firstName;
@@ -98,31 +93,19 @@ public class Contact {
         this.email = email;
     }
 
-    // equals() method
-
     @Override
     public boolean equals(Object o) {
-
-        if (this == o)
-            return true;
-
-        if (!(o instanceof Contact))
-            return false;
-
+        if (this == o) return true;
+        if (!(o instanceof Contact)) return false;
         Contact contact = (Contact) o;
-
         return Objects.equals(firstName, contact.firstName) &&
                Objects.equals(lastName, contact.lastName);
     }
-
-    // hashCode() method
 
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName);
     }
-
-    // toString()
 
     @Override
     public String toString() {
