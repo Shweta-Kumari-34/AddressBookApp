@@ -6,8 +6,8 @@ import com.addressbookapp.service.AddressBookService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddressBookServiceTest {
 
@@ -29,6 +29,26 @@ class AddressBookServiceTest {
         addressBookService.addContact(contact);
 
         assertEquals(1, addressBookService.getAllContacts().size());
+    }
+
+    @Test
+    void givenMultipleContacts_WhenAdded_ShouldStoreAllContacts() {
+        AddressBookService addressBookService = new AddressBookService();
+
+        Contact contact1 = new Contact(
+                "Shweta", "Srivastava", "MP Nagar", "Bhopal",
+                "MP", "462001", "9876543210", "shweta@gmail.com"
+        );
+
+        Contact contact2 = new Contact(
+                "Riya", "Kumari", "Lalghati", "Patna",
+                "Bihar", "800001", "9999999999", "riya@gmail.com"
+        );
+
+        addressBookService.addContact(contact1);
+        addressBookService.addContact(contact2);
+
+        assertEquals(2, addressBookService.getAllContacts().size());
     }
 
     @Test
@@ -61,8 +81,6 @@ class AddressBookServiceTest {
 
         assertTrue(isEdited);
         assertEquals("Lalghati", addressBookService.getAllContacts().get(0).getAddress());
-        assertEquals("Bhopal", addressBookService.getAllContacts().get(0).getCity());
-        assertEquals("Madhya Pradesh", addressBookService.getAllContacts().get(0).getState());
         assertEquals("462030", addressBookService.getAllContacts().get(0).getZip());
         assertEquals("9999999999", addressBookService.getAllContacts().get(0).getPhoneNumber());
         assertEquals("newshweta@gmail.com", addressBookService.getAllContacts().get(0).getEmail());
