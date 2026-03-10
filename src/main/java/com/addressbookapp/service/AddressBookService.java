@@ -13,15 +13,12 @@ public class AddressBookService {
         this.contactList = new ArrayList<>();
     }
 
-    // Add Contact
     public void addContact(Contact contact) {
         contactList.add(contact);
         System.out.println("Contact added successfully.");
     }
 
-    // Display all contacts
     public void displayContacts() {
-
         if (contactList.isEmpty()) {
             System.out.println("Address Book is empty.");
             return;
@@ -32,18 +29,15 @@ public class AddressBookService {
         }
     }
 
-    // Get all contacts
     public List<Contact> getAllContacts() {
         return contactList;
     }
 
-    // Edit contact using first and last name
     public boolean editContact(String firstName, String lastName,
                                String address, String city, String state,
                                String zip, String phoneNumber, String email) {
 
         for (Contact contact : contactList) {
-
             if (contact.getFirstName().equalsIgnoreCase(firstName)
                     && contact.getLastName().equalsIgnoreCase(lastName)) {
 
@@ -63,11 +57,8 @@ public class AddressBookService {
         return false;
     }
 
-    // Delete contact using first and last name
     public boolean deleteContact(String firstName, String lastName) {
-
         for (Contact contact : contactList) {
-
             if (contact.getFirstName().equalsIgnoreCase(firstName)
                     && contact.getLastName().equalsIgnoreCase(lastName)) {
 
